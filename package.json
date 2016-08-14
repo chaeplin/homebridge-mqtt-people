@@ -1,0 +1,34 @@
+{
+  "name": "homebridge-mqtt-people",
+  "version": "0.1.2",
+  "description": "A HomeBridge plugin for MQTT people sensors.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chaeplin/homebridge-mqtt-people.git"
+  },
+  "files": [
+    "index.js",
+    "README.md"
+  ],
+  "keywords": [
+    "homebridge-plugin","mqtt","people"
+  ],
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=0.2.0"
+  },
+  "author": "chaeplin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chaeplun/homebridge-mqtt-peopleissues"
+  },
+  "homepage": "https://github.com/chaeplin/homebridge-mqtt-people#readme",
+  "dependencies": {
+    "mqtt": "^1.12.0"
+  },
+  "devDependencies": {}
+}
