@@ -13,10 +13,21 @@
       "accessory": "mqtt-people",
       "name": "mqtt-people",
       "url": "mqtt://localhost",
-      "topic": "home/check/checkhwmny",
-      "msgobject": "unihost",
       "username": "username",
-      "password": "password"
+      "password": "password",
+      "topics":
+      {
+        "People": "home/check/checkhwmny",
+        "PowerUsage": "esp8266/arduino/s07",
+        "DustandSoil": "esp8266/arduino/s03"
+      },
+      "msgobject":
+      {
+        "People": "unihost",
+        "PowerUsage": "powerAvg",
+        "DustDensity": "dustDensity",
+        "SoilMoisture": "moisture"
+      }
     }
   ],
 
