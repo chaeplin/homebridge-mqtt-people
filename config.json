@@ -26,7 +26,8 @@
         "People": "unihost",
         "PowerUsage": "powerAvg",
         "DustDensity": "dustDensity",
-        "SoilMoisture": "moisture"
+        "SoilMoisture": "moisture",
+        "Millis": "millis"
       }
     }
   ],

@@ -74,20 +74,29 @@ function PeopleAccessory(log, config) {
     var data = JSON.parse(message);
     if (data === null) {return null}
     if (topic == that.topics.People) {
-      that.OccupancyDetected = (parseFloat(data[that.msgobject.People]) == 0 ? Characteristic.OccupancyDetected.OCCUPANCY_NOT_DETECTED : Characteristic.OccupancyDetected.OCCUPANCY_DETECTED);
-      that.service.getCharacteristic(Characteristic.OccupancyDetected).setValue(that.OccupancyDetected, undefined, 'fromSetValue');
+      if (parseInt(data[that.msgobject.People]) != that.OccupancyDetected) {
+         that.OccupancyDetected = (parseInt(data[that.msgobject.People]) == 0 ? Characteristic.OccupancyDetected.OCCUPANCY_NOT_DETECTED : Characteristic.OccupancyDetected.OCCUPANCY_DETECTED);
+         that.service.getCharacteristic(Characteristic.OccupancyDetected).setValue(that.OccupancyDetected, undefined, 'fromSetValue');
+      }
     }
 
     if (topic == that.topics.PowerUsage) {
-      that.PowerUsage = parseFloat(data[that.msgobject.PowerUsage]);
-      that.service.getCharacteristic(PowerUsage).setValue(that.PowerUsage, undefined, 'fromSetValue');
+      if ((parseInt((data[that.msgobject.Millis]/1000)) % 10) == 0) {
+        that.PowerUsage = parseFloat(data[that.msgobject.PowerUsage]);
+        that.service.getCharacteristic(PowerUsage).setValue(that.PowerUsage, undefined, 'fromSetValue');
+      }
     }
 
     if (topic == that.topics.DustandSoil) {
-      that.DustDensity = (data[that.msgobject.DustDensity] * 10);
-      that.SoilMoisture = parseFloat(data[that.msgobject.SoilMoisture]);
-      that.service.getCharacteristic(DustDensity).setValue(that.DustDensity, undefined, 'fromSetValue');
-      that.service.getCharacteristic(SoilMoisture).setValue(that.SoilMoisture, undefined, 'fromSetValue');
+      if ( that.DustDensity != (data[that.msgobject.DustDensity] * 10) ) {
+        that.DustDensity = (data[that.msgobject.DustDensity] * 10);
+        that.service.getCharacteristic(DustDensity).setValue(that.DustDensity, undefined, 'fromSetValue');
+      }
+
+      if ( that.SoilMoisture != parseInt(data[that.msgobject.SoilMoisture])) {
+        that.SoilMoisture = parseInt(data[that.msgobject.SoilMoisture]);
+        that.service.getCharacteristic(SoilMoisture).setValue(that.SoilMoisture, undefined, 'fromSetValue');
+      }
     }
   });
 
@@ -123,8 +132,7 @@ function makePowerUsageCharacteristic() {
         this.setProps({
             format: Characteristic.Formats.UINT16,
             unit: 'W',
-            //perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
-            perms: [Characteristic.Perms.READ]
+            perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
         });
     
         this.value = this.getDefaultValue();
@@ -139,8 +147,7 @@ function makeDustDensityCharacteristic() {
         this.setProps({
             format: Characteristic.Formats.FLOAT,
             unit: 'mg/m3',
-            //perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
-            perms: [Characteristic.Perms.READ]
+            perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
         });
     
         this.value = this.getDefaultValue();
@@ -154,8 +161,7 @@ function makeSoilMoistureCharacteristic() {
     
         this.setProps({
             format: Characteristic.Formats.UINT16,
-            //perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
-            perms: [Characteristic.Perms.READ]
+            perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
         });
     
         this.value = this.getDefaultValue();
