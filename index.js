@@ -123,7 +123,8 @@ function makePowerUsageCharacteristic() {
         this.setProps({
             format: Characteristic.Formats.UINT16,
             unit: 'W',
-            perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
+            //perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
+            perms: [Characteristic.Perms.READ]
         });
     
         this.value = this.getDefaultValue();
@@ -138,7 +139,8 @@ function makeDustDensityCharacteristic() {
         this.setProps({
             format: Characteristic.Formats.FLOAT,
             unit: 'mg/m3',
-            perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
+            //perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
+            perms: [Characteristic.Perms.READ]
         });
     
         this.value = this.getDefaultValue();
@@ -152,7 +154,8 @@ function makeSoilMoistureCharacteristic() {
     
         this.setProps({
             format: Characteristic.Formats.UINT16,
-            perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
+            //perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
+            perms: [Characteristic.Perms.READ]
         });
     
         this.value = this.getDefaultValue();
